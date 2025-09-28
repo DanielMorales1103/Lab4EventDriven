@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c82cd62686755a4a8291e5e136d08ac, type: 3}
+  m_Name: SpeedPotion
+  m_EditorClassIdentifier: 
+  displayName: 
+  icon: {fileID: 0}
+  kind: 2
+  scoreAmount: 0
+  healAmount: 0
+  speedSeconds: 6
+  doorKey: 
+  audioClip: {fileID: 0}
+  goesToInventory: 1
