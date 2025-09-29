@@ -27,7 +27,6 @@ public class InventoryUI : MonoBehaviour
     {
         if (!inventory || !content || !itemTemplate) return;
 
-        // limpia todo salvo el template
         for (int i = content.childCount - 1; i >= 0; i--)
         {
             var child = content.GetChild(i).gameObject;
@@ -39,7 +38,6 @@ public class InventoryUI : MonoBehaviour
             var go = Instantiate(itemTemplate, content);
             go.SetActive(true);
 
-            // busca por nombre exacto; si falla, usa fallback
             var icon = go.transform.Find("Icon")?.GetComponent<Image>()
                        ?? go.GetComponentInChildren<Image>(true);
             var name = go.transform.Find("Name")?.GetComponent<TextMeshProUGUI>()
@@ -49,6 +47,5 @@ public class InventoryUI : MonoBehaviour
             if (name) name.text = string.IsNullOrWhiteSpace(it.displayName) ? "(Unnamed)" : it.displayName;
         }
 
-        Debug.Log($"[InventoryUI] Redraw items={inventory.Items.Count}");
     }
 }

@@ -16,8 +16,9 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 082d51755575e314daa00a687de669ef, type: 3}
   kind: 1
   scoreAmount: 0
-  healAmount: 25
+  healAmount: 10
+  damageAmount: 0
   speedSeconds: 0
   doorKey: 
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: bb5cf080fe985ce47a3e78d3e0eb58b9, type: 3}
   goesToInventory: 1

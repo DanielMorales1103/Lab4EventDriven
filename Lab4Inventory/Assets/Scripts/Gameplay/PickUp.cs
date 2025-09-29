@@ -57,6 +57,11 @@ public class PickUp : MonoBehaviour
             EventBus.Publish<float>(EventIds.SpeedBuffRequested, data.speedSeconds);
         }
 
+        if (data != null && data.audioClip)
+        {
+            EventBus.Publish<AudioClip>(EventIds.PlaySfx, data.audioClip);
+        }
+
         Destroy(gameObject); 
     }
 }

@@ -17,7 +17,8 @@ MonoBehaviour:
   kind: 3
   scoreAmount: 0
   healAmount: 0
+  damageAmount: 0
   speedSeconds: 0
   doorKey: Blue
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: 036cb6d650c029b4eaf25938c3576745, type: 3}
   goesToInventory: 1

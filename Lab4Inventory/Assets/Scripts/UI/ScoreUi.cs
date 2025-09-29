@@ -9,7 +9,6 @@ public class ScoreUI : MonoBehaviour
     private void OnEnable()
     {
         EventBus.Subscribe<int>(EventIds.ScoreUpdated, OnScoreUpdated);
-        // Pintar estado inicial
         if (label && scoreManager) label.text = $"Score: {scoreManager.Score}";
     }
 

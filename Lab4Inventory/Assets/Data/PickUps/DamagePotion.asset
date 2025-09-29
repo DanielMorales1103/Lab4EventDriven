@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: DamagePotion
   m_EditorClassIdentifier: 
   displayName: Damage Potion
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 1d5dfa6066ee7df4d95a078cbb643500, type: 3}
   kind: 4
   scoreAmount: 0
   healAmount: 0
   damageAmount: 10
   speedSeconds: 0
   doorKey: 
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: f674b3936a93a9343bd061918a2926fa, type: 3}
   goesToInventory: 1

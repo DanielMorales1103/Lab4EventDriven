@@ -21,6 +21,5 @@ public class Inventory : MonoBehaviour
         if (data == null) return;
         _items.Add(data);
         EventBus.Publish(EventIds.InventoryUpdated);
-        Debug.Log($"[Inventory] Added: {data.displayName} (count={_items.Count})");
     }
 }
