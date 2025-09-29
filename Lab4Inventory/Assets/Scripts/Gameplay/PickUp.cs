@@ -22,7 +22,41 @@ public class PickUp : MonoBehaviour
     void Collect()
     {
         collected = true;
+        var label = string.IsNullOrWhiteSpace(data?.displayName) ? name : data.displayName;
         Debug.Log($"[PickUp] Collected: {data?.displayName ?? name}");
+
+        if (data != null && data.kind == PickUpKind.Score && data.scoreAmount != 0)
+        {
+            EventBus.Publish<int>(EventIds.ScoreChanged, data.scoreAmount);
+        }
+
+        if (data != null && data.goesToInventory)
+        {
+            Debug.Log($"[PickUp] Sending to inventory: {data.displayName}");
+            EventBus.Publish<PickUpData>(EventIds.ItemCollected, data);
+        }
+
+        if (data != null && data.kind == PickUpKind.Key && !string.IsNullOrWhiteSpace(data.doorKey))
+        {
+            EventBus.Publish<string>(EventIds.DoorOpen, data.doorKey);
+            Debug.Log($"[PickUp] Sent DoorOpen for key: {data.doorKey}");
+        }
+
+        if (data != null && data.kind == PickUpKind.Heal && data.healAmount > 0)
+        {
+            EventBus.Publish<int>(EventIds.HealRequested, data.healAmount);
+        }
+
+        if (data != null && data.kind == PickUpKind.Damage && data.damageAmount > 0)
+        {
+            EventBus.Publish<int>(EventIds.DamageRequested, data.damageAmount);
+        }
+
+        if (data != null && data.kind == PickUpKind.Speed && data.speedSeconds > 0f)
+        {
+            EventBus.Publish<float>(EventIds.SpeedBuffRequested, data.speedSeconds);
+        }
+
         Destroy(gameObject); 
     }
 }
