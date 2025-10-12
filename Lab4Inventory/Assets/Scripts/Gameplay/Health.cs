@@ -58,4 +58,13 @@ public class Health : MonoBehaviour
             EventBus.Publish<HealthPayload>(EventIds.HealthUpdated, new HealthPayload(Current, Max));
         }
     }
+
+    public void SetHP(int value)
+    {
+        int clamped = Mathf.Clamp(value, 0, Max);
+        if (clamped == Current) return;
+        Current = clamped;
+        EventBus.Publish<HealthPayload>(EventIds.HealthUpdated, new HealthPayload(Current, Max));
+    }
+
 }

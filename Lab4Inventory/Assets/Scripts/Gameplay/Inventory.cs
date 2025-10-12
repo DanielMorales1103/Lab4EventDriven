@@ -22,4 +22,11 @@ public class Inventory : MonoBehaviour
         _items.Add(data);
         EventBus.Publish(EventIds.InventoryUpdated);
     }
+
+    public void Import(List<PickUpData> items)
+    {
+        _items.Clear();
+        if (items != null) _items.AddRange(items);
+        EventBus.Publish(EventIds.InventoryUpdated);
+    }
 }

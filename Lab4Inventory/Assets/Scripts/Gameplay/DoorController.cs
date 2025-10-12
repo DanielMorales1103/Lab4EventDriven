@@ -13,6 +13,25 @@ public class DoorController : MonoBehaviour
     private Vector3 _startPos;
     private Collider _solid;
 
+    public bool IsOpen => _opened;
+
+    public void ForceOpen()
+    {
+        if (_opened) return;
+        _opened = true;
+        if (_solid) _solid.enabled = false;
+        Vector3 target = _startPos + Vector3.up * liftDistance;
+        transform.position = target;
+        StopAllCoroutines();
+    }
+
+    public void GrantKey(string key)
+    {
+        if (string.IsNullOrWhiteSpace(key)) return;
+        if (string.Equals(key, doorKey, System.StringComparison.OrdinalIgnoreCase))
+            _hasKey = true;
+    }
+
     private void Awake()
     {
         _startPos = transform.position;

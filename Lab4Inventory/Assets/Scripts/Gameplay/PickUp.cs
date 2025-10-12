@@ -6,6 +6,28 @@ public class PickUp : MonoBehaviour
     [SerializeField] public PickUpData data;    
     bool collected;
 
+    [SerializeField] private string persistentId;
+
+#if UNITY_EDITOR
+    void OnValidate()
+    {
+        if (string.IsNullOrEmpty(persistentId))
+            persistentId = System.Guid.NewGuid().ToString();
+
+        var col = GetComponent<Collider>();
+        if (col) col.isTrigger = true;
+    }
+#endif
+
+    void Start()
+    {
+        if (!string.IsNullOrEmpty(persistentId) && CollectedRegistry.IsCollected(persistentId))
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
+
     void Reset()
     {
         var col = GetComponent<Collider>();
@@ -23,7 +45,6 @@ public class PickUp : MonoBehaviour
     {
         collected = true;
         var label = string.IsNullOrWhiteSpace(data?.displayName) ? name : data.displayName;
-        Debug.Log($"[PickUp] Collected: {data?.displayName ?? name}");
 
         if (data != null && data.kind == PickUpKind.Score && data.scoreAmount != 0)
         {
@@ -32,14 +53,12 @@ public class PickUp : MonoBehaviour
 
         if (data != null && data.goesToInventory)
         {
-            Debug.Log($"[PickUp] Sending to inventory: {data.displayName}");
             EventBus.Publish<PickUpData>(EventIds.ItemCollected, data);
         }
 
         if (data != null && data.kind == PickUpKind.Key && !string.IsNullOrWhiteSpace(data.doorKey))
         {
             EventBus.Publish<string>(EventIds.DoorOpen, data.doorKey);
-            Debug.Log($"[PickUp] Sent DoorOpen for key: {data.doorKey}");
         }
 
         if (data != null && data.kind == PickUpKind.Heal && data.healAmount > 0)
@@ -61,6 +80,9 @@ public class PickUp : MonoBehaviour
         {
             EventBus.Publish<AudioClip>(EventIds.PlaySfx, data.audioClip);
         }
+
+        if (!string.IsNullOrEmpty(persistentId))
+            CollectedRegistry.MarkCollected(persistentId);
 
         Destroy(gameObject); 
     }
